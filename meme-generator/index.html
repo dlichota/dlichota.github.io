@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meme Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+</head>
+
+<body>
+    <h1>Meme Generator</h1>
+
+    <input type="file" id="imageLoader" name="imageLoader" />
+    <label for="textColorPicker">Choose Text Color:</label>
+    <input type="color" id="textColorPicker" onchange="changeTextColor(this.value)">
+
+    <canvas id="c" width="500" height="500"></canvas>
+
+    <script>
+        var canvas = new fabric.Canvas('c');
+        var text; // Declare text variable outside to make it globally accessible
+
+        document.getElementById('imageLoader').addEventListener('change', function(e) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var imgObj = new Image();
+                imgObj.src = event.target.result;
+                imgObj.onload = function() {
+                    var image = new fabric.Image(imgObj);
+                    image.scaleToWidth(canvas.width);
+                    image.set({
+                        angle: 0,
+                        padding: 10,
+                        cornerSize: 10,
+                        selectable: false // Make the image non-selectable
+                    });
+                    canvas.centerObject(image);
+                    canvas.add(image);
+                    canvas.renderAll();
+                }
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        });
+
+        // Add text after the image has been added to ensure it's on top
+        text = new fabric.IText('Tap and Type', {
+            left: 100,
+            top: 100,
+            fontFamily: 'arial',
+            fill: '#333',
+            fontSize: 50
+        });
+        canvas.add(text);
+        text.bringToFront();
+        canvas.renderAll();
+
+        // Make the canvas object (text) selectable and resizable
+        text.set({
+            borderColor: 'red',
+            cornerColor: 'green',
+            cornerSize: 6,
+            transparentCorners: false
+        });
+
+        // Function to change text color
+        function changeTextColor(value) {
+            if (text) {
+                text.set({
+                    fill: value
+                });
+                canvas.renderAll();
+            }
+        }
+
+        canvas.on('object:modified', function() {
+            canvas.renderAll();
+        });
+
+        function saveImage() {
+            // Ensure the canvas is fully rendered before exporting
+            canvas.renderAll();
+
+            // Convert the canvas to a data URL
+            var dataURL = canvas.toDataURL('image/png');
+
+            // Create a link element for download
+            var link = document.createElement('a');
+            link.download = 'custom-image.png'; // Set the download filename
+            link.href = dataURL;
+            document.body.appendChild(link);
+            link.click(); // Trigger the download
+            document.body.removeChild(link); // Clean up
+        }
+
+    </script>
+    <button onclick="saveImage()">Save Image</button>
+</body>
+
+</html>

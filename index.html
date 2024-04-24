@@ -136,14 +136,7 @@
                 ctx.fillText(document.getElementById('textInput1').value, textX1, textY1);
                 ctx.fillText(document.getElementById('textInput2').value, textX2, textY2);
             }
-            img.src = URL.createObjectURL(document.getElementById('imageInput').files[0]);
-        }
-
-        function saveMeme() {
-            let link = document.createElement('a');
-            link.download = 'meme.png';
-            link.href = canvas.toDataURL();
-            link.click();
+            img.src = URL.createObjectURL(document.getElementById('imageInput').files[0]) || document.querySelector('.gallery-image').src;
         }
 
     </script>

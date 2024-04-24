@@ -9,7 +9,18 @@
 
 <body>
     <h1>Customize Your Meme</h1>
-    <!-- Your input elements and canvas go here -->
+    <input type="file" id="imageInput" accept="image/*">
+    <input type="text" id="textInput1" placeholder="Enter meme text here" oninput="generateMeme()">
+    <input type="text" id="textInput2" placeholder="Enter meme text here" oninput="generateMeme()">
+    <input type="color" id="colorInput" value="#000000" oninput="generateMeme()">
+    <select id="fontInput" oninput="generateMeme()">
+        <option value="Arial">Arial</option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+        <option value="Courier New">Courier New</option>
+    </select>
+    <input type="number" id="fontSizeInput" min="10" max="100" value="30" oninput="generateMeme()">
+    <button onclick="saveMeme()">Save Meme</button>
+    <canvas id="memeCanvas" onmousedown="startDrag(event)" onmousemove="dragText(event)" onmouseup="stopDrag()"></canvas>
 
     <script src="customizeMeme.js"></script>
 </body>

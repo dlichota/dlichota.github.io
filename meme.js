@@ -18,5 +18,5 @@ function loadTemplate(src) {
 }   */
 
 function loadTemplate(src) {
-    window.location.href = 'customization.html?template=' + encodeURIComponent(src);
+    window.location.href = 'customize.html?template=' + encodeURIComponent(src);
 }

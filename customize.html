@@ -4,30 +4,8 @@
         <title>Meme Generator - Customize</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.14.0/js-yaml.min.js"></script>
-        <style>
-            #userImageInput {
-                display: none;
-            }
-            .custom-file-upload {
-            display: inline-block;
-            padding: 6px 12px;
-            cursor: pointer;
-            background-color: #008CBA; /* Blue background */
-            border: none; /* Remove borders */
-            color: white; /* White text */
-            text-align: center; /* Centered text */
-            text-decoration: none; /* Remove underline */
-            font-size: 16px; /* Increase font size */
-            margin: 4px 2px; /* Add some margin */
-            transition-duration: 0.4s; /* Add a transition effect (when you mouse over the button, it changes color) */
-        }
-
-        .custom-file-upload:hover {
-            background-color: #4CAF50; /* Green */
-            color: white;
-        }
-        </style>
-        
+        <link rel="stylesheet" type="text/css" href="style.css"> 
+            
     </head>
 
     <body>
@@ -73,7 +51,9 @@
             onmousedown="startDrag(event)"
             onmousemove="dragText(event)"
             onmouseup="stopDrag()"></canvas>
-
+        <button onclick="window.location.href='index.html'">
+            Back to Templates
+        </button>
         <script src="customizeMeme.js"></script>
     </body>
 </html>

@@ -7,20 +7,33 @@
         <style>
             #userImageInput {
                 display: none;
+            .custom-file-upload {
+                display: inline-block;
+                padding: 6px 12px;
+                cursor: pointer;
+                background-color: #008CBA; /* Blue background */
+                border: none; /* Remove borders */
+                color: white; /* White text */
+                text-align: center; /* Centered text */
+                text-decoration: none; /* Remove underline */
+                font-size: 16px; /* Increase font size */
+                margin: 4px 2px; /* Add some margin */
+                transition-duration: 0.4s; /* Add a transition effect (when you mouse over the button, it changes color) */
+            }
+
+            .custom-file-upload:hover {
+                background-color: #4CAF50; /* Green */
+                color: white;
+            }
         </style>
-        }
+        
     </head>
 
     <body>
         <h1>Customize Your Meme</h1>
-        <label for="userImageInput" class="custom-file-upload">
-            <button>Upload Your Image</button>
-        </label>
-        <input
-            type="file"
-            id="userImageInput"
-            accept="image/*"
-            onchange="loadUserImage()" />
+        <label for="userImageInput" class="custom-file-upload"
+            >Upload Your Image</label
+        >
         <input
             type="file"
             id="userImageInput"

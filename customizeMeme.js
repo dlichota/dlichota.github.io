@@ -87,11 +87,21 @@ function generateMeme() {
     img.src = document.getElementById('userImageInput').files.length > 0 ? URL.createObjectURL(document.getElementById('userImageInput').files[0]) : selectedTemplateSrc;
 }
 
-function drawText() {
+/*function drawText() {
     ctx.font = document.getElementById('fontSizeInput').value + 'px ' + document.getElementById('fontInput').value;
     ctx.fillStyle = document.getElementById('colorInput').value;
     ctx.fillText(document.getElementById('textInput1').value, textX1, textY1);
     ctx.fillText(document.getElementById('textInput2').value, textX2, textY2);
+}*/
+
+function drawText() {
+    var font = document.getElementById('fontSizeInput').value + 'px ' + document.getElementById('fontInput').value;
+    document.fonts.load(font).then(function() {
+        ctx.font = font;
+        ctx.fillStyle = document.getElementById('colorInput').value;
+        ctx.fillText(document.getElementById('textInput1').value, textX1, textY1);
+        ctx.fillText(document.getElementById('textInput2').value, textX2, textY2);
+    });
 }
 
 function saveMeme() {

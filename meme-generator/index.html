@@ -25,23 +25,23 @@
         document.getElementById('imageLoader').addEventListener('change', function(e) {
             var reader = new FileReader();
             reader.onload = function(event) {
-                var imgObj = new Image();
-                imgObj.src = event.target.result;
-                imgObj.onload = function() {
-                    var image = new fabric.Image(imgObj);
-                    image.scaleToWidth(canvas.width);
-                    image.set({
-                        angle: 0,
-                        padding: 10,
-                        cornerSize: 10,
-                        selectable: false // Make the image non-selectable
-                    });
-                    canvas.centerObject(image);
-                    canvas.add(image);
-                    canvas.renderAll();
+                    var imgObj = new Image();
+                    imgObj.src = event.target.result;
+                    imgObj.onload = function() {
+                        var image = new fabric.Image(imgObj);
+                        image.scaleToWidth(canvas.width);
+                        image.set({
+                            angle: 0,
+                            padding: 10,
+                            cornerSize: 10,
+                            selectable: false // Make the image non-selectable
+                        });
+                        canvas.centerObject(image);
+                        canvas.add(image);
+                        canvas.renderAll();
+                    }
                 }
-            }
-            reader.readAsDataURL(e.target.files[0]);
+                //reader.readAsDataURL(e.target.files[0]);
         });
 
         // Add text after the image has been added to ensure it's on top

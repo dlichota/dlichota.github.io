@@ -44,6 +44,9 @@
                     imgElement.src = template.imageFile;
                     imgElement.alt = template.templateName;
                     imgElement.className = 'gallery-image';
+                    imgElement.addEventListener('click', function() {
+                        loadTemplate(this.src);
+                    });
                     document.getElementById('gallery').appendChild(imgElement);
                 });
         });
@@ -64,6 +67,19 @@
     <canvas id="memeCanvas" onmousedown="startDrag(event)" onmousemove="dragText(event)" onmouseup="stopDrag()"></canvas>
 
     <script>
+        function loadTemplate(src) {
+            const img = new Image();
+            img.onload = function() {
+                let scale = Math.min(500 / img.width, 500 / img.height);
+                let width = img.width * scale;
+                let height = img.height * scale;
+                canvas.width = width;
+                canvas.height = height;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, width, height);
+            }
+            img.src = src;
+        }
         const canvas = document.getElementById('memeCanvas');
         const ctx = canvas.getContext('2d');
         let dragging = false;

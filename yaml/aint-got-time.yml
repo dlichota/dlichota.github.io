@@ -1,0 +1,17 @@
+templateName: "Template 1"
+imageFile: "aint-got-time.png"
+textBoxes:
+  - id: "text1"
+    x: 50
+    y: 50
+    defaultText: "Top text"
+    defaultColor: "#000000"
+    defaultFont: "Arial"
+    defaultFontSize: 30
+  - id: "text2"
+    x: 50
+    y: 450
+    defaultText: "Bottom text"
+    defaultColor: "#000000"
+    defaultFont: "Arial"
+    defaultFontSize: 30

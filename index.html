@@ -81,9 +81,11 @@
                 canvas.height = height;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(img, 0, 0, width, height);
+                generateMeme(); // Call generateMeme after the image is drawn
             }
             img.src = src;
         }
+
         const canvas = document.getElementById('memeCanvas');
         const ctx = canvas.getContext('2d');
         let dragging = false;
@@ -140,6 +142,13 @@
                 ctx.fillText(document.getElementById('textInput2').value, textX2, textY2);
             }
             img.src = URL.createObjectURL(document.getElementById('imageInput').files[0]) || document.querySelector('.gallery-image').src;
+        }
+
+        function saveMeme() {
+            var link = document.createElement('a');
+            link.download = 'meme.png';
+            link.href = document.getElementById('memeCanvas').toDataURL();
+            link.click();
         }
 
     </script>

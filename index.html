@@ -70,8 +70,8 @@
         var selectedTemplateSrc;
 
         function loadTemplate(src) {
-            // Add a global variable to store the source of the selected template
-            var selectedTemplateSrc = src;
+            // Assign the source of the selected template to the global variable
+            selectedTemplateSrc = src;
             const img = new Image();
             img.onload = function() {
                 let scale = Math.min(500 / img.width, 500 / img.height);
@@ -84,7 +84,6 @@
             }
             img.src = src;
         }
-
         const canvas = document.getElementById('memeCanvas');
         const ctx = canvas.getContext('2d');
         let dragging = false;

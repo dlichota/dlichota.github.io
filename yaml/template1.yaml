@@ -1,5 +1,5 @@
 templateName: "Template 1"
-imageFile: "prat.png"
+imageFile: "img/prat.png"
 textBoxes:
   - id: "text1"
     x: 50

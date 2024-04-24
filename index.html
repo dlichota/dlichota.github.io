@@ -14,6 +14,26 @@
 
 <body>
     <h1>Meme Generator</h1>
+    <div id="gallery"></div>
+
+    <script>
+        // List of YAML files
+        var yamlFiles = ['template1.yaml', 'template2.yaml', 'template3.yaml', 'template4.yaml', 'template5.yaml', 'template6.yaml'];
+
+        yamlFiles.forEach(function(file) {
+            fetch('yaml/' + file)
+                .then(response => response.text())
+                .then(data => {
+                    var template = jsyaml.load(data);
+                    var imgElement = document.createElement('img');
+                    imgElement.src = 'img/' + template.image;
+                    imgElement.alt = template.name;
+                    document.getElementById('gallery').appendChild(imgElement);
+                });
+        });
+
+    </script>
+
     <input type="file" id="imageInput" accept="image/*">
     <input type="text" id="textInput1" placeholder="Enter meme text here" oninput="generateMeme()">
     <input type="text" id="textInput2" placeholder="Enter meme text here" oninput="generateMeme()">

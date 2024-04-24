@@ -1,28 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
     <title>Meme Generator</title>
+    <style>
+        #memeCanvas {
+            border: 1px solid black;
+        }
+
+    </style>
 </head>
 
 <body>
+    <h1>Meme Generator</h1>
+    <input type="file" id="imageInput" accept="image/*">
+    <input type="text" id="textInput" placeholder="Enter meme text here" oninput="generateMeme()">
+    <input type="color" id="colorInput" value="#000000" oninput="generateMeme()">
+    <select id="fontInput" oninput="generateMeme()">
+        <option value="Arial">Arial</option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+        <option value="Courier New">Courier New</option>
+    </select>
+    <button onclick="generateMeme()">Generate Meme</button>
+    <button onclick="saveMeme()">Save Meme</button>
+    <canvas id="memeCanvas" onmousedown="startDrag(event)" onmousemove="dragText(event)" onmouseup="stopDrag()"></canvas>
 
+    <script>
+        const canvas = document.getElementById('memeCanvas');
+        const ctx = canvas.getContext('2d');
+        let dragging = false;
+        let textX = 50,
+            textY = 50;
 
+        function startDrag(e) {
+            let rect = canvas.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+            if (x >= textX && x <= textX + ctx.measureText(document.getElementById('textInput').value).width && y >= textY - 30 && y <= textY) {
+                dragging = true;
+            }
+        }
 
+        function dragText(e) {
+            if (dragging) {
+                let rect = canvas.getBoundingClientRect();
+                textX = e.clientX - rect.left;
+                textY = e.clientY - rect.top;
+                generateMeme();
+            }
+        }
 
-    <div class="row">
-        <div class="column">
-            <img src="https://api.memegen.link/images/buzz/memes/memes_everywhere.webp?token=wxgjeu3jll4dt9q6fihy&width=800">
-            <img src="https://api.memegen.link/images/aag/_/aliens.png">
-            <img src="https://api.memegen.link/images/ackbar/_/it's_a_trap!.png">
-            <!-- Add more images as needed -->
-        </div>
-        <!-- Add more columns as needed -->
-    </div>
+        function stopDrag() {
+            dragging = false;
+        }
+
+        function generateMeme() {
+            const img = new Image();
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                ctx.font = '30px ' + document.getElementById('fontInput').value;
+                ctx.fillStyle = document.getElementById('colorInput').value;
+                ctx.fillText(document.getElementById('textInput').value, textX, textY);
+            }
+            img.src = URL.createObjectURL(document.getElementById('imageInput').files[0]);
+        }
+
+        function saveMeme() {
+            let link = document.createElement('a');
+            link.download = 'meme.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+    </script>
 </body>
 
 </html>

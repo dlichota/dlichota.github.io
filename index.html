@@ -21,6 +21,7 @@
         <option value="Comic Sans MS">Comic Sans MS</option>
         <option value="Courier New">Courier New</option>
     </select>
+    <input type="number" id="fontSizeInput" min="10" max="100" value="30" oninput="generateMeme()">
     <button onclick="generateMeme()">Generate Meme</button>
     <button onclick="saveMeme()">Save Meme</button>
     <canvas id="memeCanvas" onmousedown="startDrag(event)" onmousemove="dragText(event)" onmouseup="stopDrag()"></canvas>
@@ -36,7 +37,7 @@
             let rect = canvas.getBoundingClientRect();
             let x = e.clientX - rect.left;
             let y = e.clientY - rect.top;
-            if (x >= textX && x <= textX + ctx.measureText(document.getElementById('textInput').value).width && y >= textY - 30 && y <= textY) {
+            if (x >= textX && x <= textX + ctx.measureText(document.getElementById('textInput').value).width && y >= textY - parseInt(document.getElementById('fontSizeInput').value) && y <= textY) {
                 dragging = true;
             }
         }
@@ -57,10 +58,10 @@
         function generateMeme() {
             const img = new Image();
             img.onload = function() {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0, img.width, img.height);
-                ctx.font = '30px ' + document.getElementById('fontInput').value;
+                canvas.width = 500;
+                canvas.height = 500;
+                ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+                ctx.font = document.getElementById('fontSizeInput').value + 'px ' + document.getElementById('fontInput').value;
                 ctx.fillStyle = document.getElementById('colorInput').value;
                 ctx.fillText(document.getElementById('textInput').value, textX, textY);
             }

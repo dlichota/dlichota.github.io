@@ -13,7 +13,7 @@ function loadTemplate(src) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0, width, height);
         generateMeme(); // Call generateMeme after the image is drawn
-    }
+    };
     img.src = src;
 }
 
@@ -71,7 +71,7 @@ function generateMeme() {
         ctx.fillStyle = document.getElementById('colorInput').value;
         ctx.fillText(document.getElementById('textInput1').value, textX1, textY1);
         ctx.fillText(document.getElementById('textInput2').value, textX2, textY2);
-    }
+    };
     img.src = document.getElementById('imageInput').files.length > 0 ? URL.createObjectURL(document.getElementById('imageInput').files[0]) : selectedTemplateSrc;
 }
 

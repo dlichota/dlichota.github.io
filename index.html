@@ -24,7 +24,7 @@
             fetch('yaml/' + file)
                 .then(response => response.text())
                 .then(data => {
-                    var template = js - yaml.load(data);
+                    var template = js-yaml.load(data);
                     var imgElement = document.createElement('img');
                     imgElement.src = template.imageFile; // Changed this line
                     imgElement.alt = template.templateName; // Changed this line to use templateName

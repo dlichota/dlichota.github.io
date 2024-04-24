@@ -3,6 +3,7 @@
 
 <head>
     <title>Meme Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.14.0/js-yaml.min.js"></script>
     <style>
         #memeCanvas {
@@ -15,6 +16,14 @@
 <body>
     <h1>Meme Generator</h1>
     <div id="gallery"></div>
+<script>
+    // Check if js-yaml is loaded
+    if (typeof jsyaml !== 'undefined') {
+        console.log('js-yaml is loaded');
+    } else {
+        console.log('js-yaml is not loaded');
+    }
+</script>
 
     <script>
         // List of YAML files

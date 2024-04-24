@@ -21,6 +21,7 @@ function loadUserImage() {
         var reader = new FileReader();
         reader.onload = function(e) {
             loadTemplate(e.target.result);
+            generateMeme();
         };
         reader.readAsDataURL(file);
     }
@@ -81,18 +82,30 @@ function generateMeme() {
         canvas.width = width;
         canvas.height = height;
         ctx.drawImage(img, 0, 0, width, height);
-        ctx.font = document.getElementById('fontSizeInput').value + 'px ' + document.getElementById('fontInput').value;
-        ctx.fillStyle = document.getElementById('colorInput').value;
-        ctx.fillText(document.getElementById('textInput1').value, textX1, textY1);
-        ctx.fillText(document.getElementById('textInput2').value, textX2, textY2);
+        drawText(); // Call drawText after the image is drawn
     };
-    img.src = document.getElementById('imageInput').files.length > 0 ? URL.createObjectURL(document.getElementById('imageInput').files[0]) : selectedTemplateSrc;
+    img.src = document.getElementById('userImageInput').files.length > 0 ? URL.createObjectURL(document.getElementById('userImageInput').files[0]) : selectedTemplateSrc;
 }
 
+function drawText() {
+    ctx.font = document.getElementById('fontSizeInput').value + 'px ' + document.getElementById('fontInput').value;
+    ctx.fillStyle = document.getElementById('colorInput').value;
+    ctx.fillText(document.getElementById('textInput1').value, textX1, textY1);
+    ctx.fillText(document.getElementById('textInput2').value, textX2, textY2);
+}
 
 function saveMeme() {
+    var canvas = document.getElementById('memeCanvas');
+    canvas.toBlob(function(blob) {
+        var link = document.createElement('a');
+        link.download = 'meme.png';
+        link.href = URL.createObjectURL(blob);
+        link.click();
+    });
+}
+/*function saveMeme() {
     var link = document.createElement('a');
     link.download = 'meme.png';
     link.href = document.getElementById('memeCanvas').toDataURL();
     link.click();
-}
+}*/

@@ -12,9 +12,15 @@
 
         .gallery-image {
             width: 200px;
-            /* Or whatever width you want */
             height: auto;
-            /* This will maintain the aspect ratio of the images */
+            margin: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
         }
 
     </style>

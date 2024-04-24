@@ -9,7 +9,8 @@
 
 <body>
     <h1>Customize Your Meme</h1>
-    <input type="file" id="imageInput" accept="image/*">
+    <input type="file" id="userImageInput" accept="image/*" onchange="loadUserImage()">
+    <!--<input type="file" id="imageInput" accept="image/*">-->
     <input type="text" id="textInput1" placeholder="Enter meme text here" oninput="generateMeme()">
     <input type="text" id="textInput2" placeholder="Enter meme text here" oninput="generateMeme()">
     <input type="color" id="colorInput" value="#000000" oninput="generateMeme()">

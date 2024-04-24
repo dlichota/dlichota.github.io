@@ -15,6 +15,17 @@ function loadTemplate(src) {
     img.src = src;
 }
 
+function loadUserImage() {
+    var file = document.getElementById('userImageInput').files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            loadTemplate(e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
 // Load the selected template when the page is loaded
 var urlParams = new URLSearchParams(window.location.search);
 var selectedTemplateSrc = decodeURIComponent(urlParams.get('template'));

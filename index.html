@@ -67,7 +67,11 @@
     <canvas id="memeCanvas" onmousedown="startDrag(event)" onmousemove="dragText(event)" onmouseup="stopDrag()"></canvas>
 
     <script>
+        var selectedTemplateSrc;
+
         function loadTemplate(src) {
+            // Add a global variable to store the source of the selected template
+            var selectedTemplateSrc = src;
             const img = new Image();
             img.onload = function() {
                 let scale = Math.min(500 / img.width, 500 / img.height);

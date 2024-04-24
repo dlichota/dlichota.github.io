@@ -58,9 +58,12 @@
         function generateMeme() {
             const img = new Image();
             img.onload = function() {
-                canvas.width = 500;
-                canvas.height = 500;
-                ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+                let scale = Math.min(500 / img.width, 500 / img.height);
+                let width = img.width * scale;
+                let height = img.height * scale;
+                canvas.width = width;
+                canvas.height = height;
+                ctx.drawImage(img, 0, 0, width, height);
                 ctx.font = document.getElementById('fontSizeInput').value + 'px ' + document.getElementById('fontInput').value;
                 ctx.fillStyle = document.getElementById('colorInput').value;
                 ctx.fillText(document.getElementById('textInput').value, textX, textY);

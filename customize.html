@@ -1,29 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+    <head>
+        <title>Meme Generator - Customize</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.14.0/js-yaml.min.js"></script>
+        <style>
+            #userImageInput {
+                display: none;
+        </style>
+        }
+    </head>
 
-<head>
-    <title>Meme Generator - Customize</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.14.0/js-yaml.min.js"></script>
-</head>
+    <body>
+        <h1>Customize Your Meme</h1>
+        <label for="userImageInput" class="custom-file-upload">
+            <button>Upload Your Image</button>
+        </label>
+        <input
+            type="file"
+            id="userImageInput"
+            accept="image/*"
+            onchange="loadUserImage()" />
+        <input
+            type="file"
+            id="userImageInput"
+            accept="image/*"
+            onchange="loadUserImage()" />
+        <input
+            type="text"
+            id="textInput1"
+            placeholder="Enter meme text here"
+            oninput="generateMeme()" />
+        <input
+            type="text"
+            id="textInput2"
+            placeholder="Enter meme text here"
+            oninput="generateMeme()" />
+        <input
+            type="color"
+            id="colorInput"
+            value="#000000"
+            oninput="generateMeme()" />
+        <select id="fontInput" oninput="generateMeme()">
+            <option value="Arial">Arial</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Courier New">Courier New</option>
+        </select>
+        <input
+            type="number"
+            id="fontSizeInput"
+            min="10"
+            max="100"
+            value="30"
+            oninput="generateMeme()" />
+        <button onclick="saveMeme()">Save Meme</button>
+        <canvas
+            id="memeCanvas"
+            onmousedown="startDrag(event)"
+            onmousemove="dragText(event)"
+            onmouseup="stopDrag()"></canvas>
 
-<body>
-    <h1>Customize Your Meme</h1>
-    <input type="file" id="userImageInput" accept="image/*" onchange="loadUserImage()">
-    <!--<input type="file" id="imageInput" accept="image/*">-->
-    <input type="text" id="textInput1" placeholder="Enter meme text here" oninput="generateMeme()">
-    <input type="text" id="textInput2" placeholder="Enter meme text here" oninput="generateMeme()">
-    <input type="color" id="colorInput" value="#000000" oninput="generateMeme()">
-    <select id="fontInput" oninput="generateMeme()">
-        <option value="Arial">Arial</option>
-        <option value="Comic Sans MS">Comic Sans MS</option>
-        <option value="Courier New">Courier New</option>
-    </select>
-    <input type="number" id="fontSizeInput" min="10" max="100" value="30" oninput="generateMeme()">
-    <button onclick="saveMeme()">Save Meme</button>
-    <canvas id="memeCanvas" onmousedown="startDrag(event)" onmousemove="dragText(event)" onmouseup="stopDrag()"></canvas>
-
-    <script src="customizeMeme.js"></script>
-</body>
-
+        <script src="customizeMeme.js"></script>
+    </body>
 </html>

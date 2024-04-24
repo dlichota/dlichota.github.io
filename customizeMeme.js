@@ -87,12 +87,7 @@ function generateMeme() {
     img.src = document.getElementById('userImageInput').files.length > 0 ? URL.createObjectURL(document.getElementById('userImageInput').files[0]) : selectedTemplateSrc;
 }
 
-/*function drawText() {
-    ctx.font = document.getElementById('fontSizeInput').value + 'px ' + document.getElementById('fontInput').value;
-    ctx.fillStyle = document.getElementById('colorInput').value;
-    ctx.fillText(document.getElementById('textInput1').value, textX1, textY1);
-    ctx.fillText(document.getElementById('textInput2').value, textX2, textY2);
-}*/
+
 
 function drawText() {
     var font = document.getElementById('fontSizeInput').value + 'px ' + document.getElementById('fontInput').value;
@@ -113,9 +108,4 @@ function saveMeme() {
         link.click();
     });
 }
-/*function saveMeme() {
-    var link = document.createElement('a');
-    link.download = 'meme.png';
-    link.href = document.getElementById('memeCanvas').toDataURL();
-    link.click();
-}*/
+

@@ -1,64 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Meme Generator</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.14.0/js-yaml.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <style>
+            #memeCanvas {
+                border: 1px solid black;
+            }
 
-<head>
-    <title>Meme Generator</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.14.0/js-yaml.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <style>
-        #memeCanvas {
-            border: 1px solid black;
-        }
+            .gallery-image {
+                width: 200px;
+                height: auto;
+                margin: 10px;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+                transition: all 0.3s ease;
+            }
 
-        .gallery-image {
-            width: 200px;
-            height: auto;
-            margin: 10px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
+            .gallery-image:hover {
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+                transform: scale(1.05);
+            }
+        </style>
+    </head>
 
-        .gallery-image:hover {
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-            transform: scale(1.05);
-        }
+    <body>
+        <h1>Meme Generator</h1>
+        <div id="gallery"></div>
 
-    </style>
+        <button onclick="window.location.href='customize.html'">
+            Choose your own image
+        </button>
 
-</head>
+        <script>
+            // List of YAML files
+            var yamlFiles = [
+                "template1.yaml",
+                "template2.yaml",
+                "template3.yaml",
+                "template4.yaml",
+                "template5.yaml",
+                "template6.yaml"
+            ];
 
-<body>
-    <h1>Meme Generator</h1>
-    <div id="gallery"></div>
-    
-    <button onclick="window.location.href='customize.html'">Choose your own image</button>
-
-    <script>
-        // List of YAML files
-        var yamlFiles = ['template1.yaml', 'template2.yaml', 'template3.yaml', 'template4.yaml', 'template5.yaml', 'template6.yaml'];
-
-        yamlFiles.forEach(function(file) {
-            fetch('yaml/' + file)
-                .then(response => response.text())
-                .then(data => {
-                    var template = jsyaml.load(data);
-                    var imgElement = document.createElement('img');
-                    imgElement.src = template.imageFile;
-                    imgElement.alt = template.templateName;
-                    imgElement.className = 'gallery-image';
-                    imgElement.addEventListener('click', function() {
-                        loadTemplate(this.src);
+            yamlFiles.forEach(function (file) {
+                fetch("yaml/" + file)
+                    .then((response) => response.text())
+                    .then((data) => {
+                        var template = jsyaml.load(data);
+                        var imgElement = document.createElement("img");
+                        imgElement.src = template.imageFile;
+                        imgElement.alt = template.templateName;
+                        imgElement.className = "gallery-image";
+                        imgElement.addEventListener("click", function () {
+                            loadTemplate(this.src);
+                        });
+                        document
+                            .getElementById("gallery")
+                            .appendChild(imgElement);
                     });
-                    document.getElementById('gallery').appendChild(imgElement);
-                });
-        });
+            });
+        </script>
 
-    </script>
-
-
-<script src="meme.js"></script>
-   
-</body>
-
+        <script src="meme.js"></script>
+    </body>
 </html>
